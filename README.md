@@ -2,7 +2,7 @@
 
 ## Description
 
-- Server application (backend, REST API) of "Jak jsme na tom?" project.
+- Server application (backend, REST API) of [Jak jsme na tom?](https://jakjsmenatom.cz/) project.
 - Implemented in Python utilizing [FastAPI](https://fastapi.tiangolo.com).
 
 ## API endpoints
