@@ -1,0 +1,66 @@
+[tool.poetry]
+authors = ["Vlada Dusek <v.dusek96@gmail.com>"]
+description = "Jak jsme na tom? - Server application (REST API)"
+name = "server-app"
+packages = [{include = "jjnt_api"}]
+readme = "README.md"
+version = "1.0.0"
+
+[tool.poetry.dependencies]
+fastapi = "^0.95.1"
+gunicorn = "^20.1.0"
+psycopg = {extras = ["binary"], version = "^3.1.9"}
+pydantic = "^1.10.7"
+python = "^3.10"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.13"}
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+httpx = "^0.24.0"
+ipython = "^8.13.2"
+isort = "^5.12.0"
+mypy = "^1.3.0"
+pylint = "^2.17.4"
+pytest = "^7.3.1"
+pytest-cov = "^4.0.0"
+requests = "^2.30.0"
+wemake-python-styleguide = "^0.17.0"
+
+[tool.poetry.scripts]
+dev = "jjnt_api.scripts:run_dev"
+
+[tool.isort]
+known_first_party = ["jjnt_api"]
+line_length = 120
+multi_line_output = 2
+profile = "black"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.mypy]
+color_output = true
+error_summary = true
+ignore_missing_imports = true
+pretty = true
+show_absolute_path = false
+show_error_codes = true
+
+[tool.pytest]
+python_files = "test_*.py"
+testpaths = "tests"
+
+[tool.pylint]
+disable = [
+  "invalid-name",
+  "missing-function-docstring",
+  "missing-module-docstring",
+  "missing-class-docstring",
+  "too-few-public-methods",
+  "too-many-arguments",
+]
+extension-pkg-whitelist = "pydantic"
+max-line-length = 120
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]

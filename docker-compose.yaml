@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  jjnt_serverapp_fastapi_service:
+    container_name: jjnt_serverapp_fastapi_container
+    image: jjnt-server-app:latest
+    environment:
+      - DB_USER=db_user
+      - DB_PASSWORD=db_password
+      - DB_HOST=db_host
+      - DB_PORT=5432
+      - DB_NAME=bn_name
+    ports:
+      - 8000:8000
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8000"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+    # this is a production command
+    command:
+      [
+        "gunicorn",
+        "jjnt_api.main:app",
+        "--bind=:8000",
+        "--workers=1",
+        "--threads=8",
+        "--timeout=0",
+        "--worker-class=uvicorn.workers.UvicornWorker",
+      ]
